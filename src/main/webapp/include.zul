@@ -1,0 +1,16 @@
+<?taglib uri="/WEB-INF/tld/helper.tld" prefix="help"?>
+<?import class="zk.method.template.ref.form.binding.HelperClass" ?>
+<zk>
+	<listbox model="@init(bean.strings)" hflex="1" vflex="1">
+		<template name="model">
+			<listitem >
+				<listcell>
+					<label value="${each}" />
+				</listcell>
+				<listcell>
+					<textbox value="@bind(HelperClass.getBean(bean,each).value)" onChange="@command('change', proxy=fx)" hflex="1" />
+				</listcell>
+			</listitem>
+		</template>
+	</listbox>
+</zk>

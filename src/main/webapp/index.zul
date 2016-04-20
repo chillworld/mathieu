@@ -1,0 +1,29 @@
+<zk>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('zk.method.template.ref.form.binding.MyViewModel')" hflex="1" vflex="1">
+		<hlayout hflex="1" vflex="1">
+			<vlayout hflex="1" vflex="1">
+				<listbox hflex="1" vflex="1" model="@load(vm.beans)" selectedItem="@bind(vm.selectedBean)">
+					<template name="model">
+						<listitem>
+							<listcell>
+								<label value="@load(each.name)" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				<button onClick="@command('add')" label="Add" />
+			</vlayout>
+
+			<panel hflex="1" vflex="1" form="@id('fx') @load(vm.selectedBean) @save(vm.selectedBean, before='save')">
+				<panelchildren>
+					<vlayout hflex="1" vflex="1">
+						<textbox value="@bind(fx.name)" hflex="1" />
+						<include hflex="1" vflex="1" bean="@ref(fx.subBean)" src="@load('include.zul')" />
+						<button onClick="@command('save')" disabled="@load(!fxStatus.dirty)" label="Save" />
+					</vlayout>
+				</panelchildren>
+			</panel>
+		</hlayout>
+	</window>
+</zk>
